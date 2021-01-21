@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  story_id: 1
+  next_id: 1
+  prev_id: 1
+  decision: false
+  content: MyText
+
+two:
+  story_id: 1
+  next_id: 1
+  prev_id: 1
+  decision: false
+  content: MyText

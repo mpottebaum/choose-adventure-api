@@ -1,0 +1,2 @@
+class StoryNode < ApplicationRecord
+end
