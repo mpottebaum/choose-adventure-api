@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_002636) do
+ActiveRecord::Schema.define(version: 2021_01_22_015532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 2021_01_21_002636) do
 
   create_table "choices", force: :cascade do |t|
     t.integer "story_node_id"
-    t.integer "next_id"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "next_node_id"
   end
 
   create_table "stories", force: :cascade do |t|
@@ -35,16 +35,16 @@ ActiveRecord::Schema.define(version: 2021_01_21_002636) do
     t.integer "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "start_node_id"
   end
 
   create_table "story_nodes", force: :cascade do |t|
     t.integer "story_id"
-    t.integer "next_id"
-    t.integer "prev_id"
-    t.boolean "decision"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.integer "next_node_id"
   end
 
 end
