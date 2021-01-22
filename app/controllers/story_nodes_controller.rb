@@ -2,7 +2,7 @@ class StoryNodesController < ApplicationController
     def create
         story_node = StoryNode.create(story_node_params)
 
-        render json: story_node
+        render json: story_node, include: [ :choices ]
     end
 
     def show
