@@ -34,6 +34,7 @@ class StoryNodesController < ApplicationController
             :content,
             :next_node_id,
             :story_id,
+            :end,
             :choices_attributes => [ :content, :next_node_id ]
         )
     end
