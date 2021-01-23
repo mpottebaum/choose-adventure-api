@@ -7,7 +7,8 @@ class ChoicesController < ApplicationController
 
     def update
         choice = Choice.find(params[:id])
-        choice.update(choices_params)
+        choice.assign_attributes(choices_params)
+
 
         render json: choice
     end
