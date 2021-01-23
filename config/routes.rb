@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   put '/story-nodes/:id', to: 'story_nodes#update'
   delete '/story-nodes/:id', to: 'story_nodes#destroy'
   
-  delete '/choices/:id', to: 'story_nodes#destroy'
+  get '/choices/:id', to: 'choices#show'
+  put '/choices/:id', to: 'choices#update'
+  delete '/choices/:id', to: 'choices#destroy'
 end
