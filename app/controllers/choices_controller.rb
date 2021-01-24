@@ -9,8 +9,12 @@ class ChoicesController < ApplicationController
         choice = Choice.find(params[:id])
         choice.assign_attributes(choices_params)
 
-
-        render json: choice
+        if choice.valid?
+            choice.save
+            render json: choice
+        else
+            render json: choice.errors, status: 400
+        end
     end
 
     def destroy
@@ -23,6 +27,6 @@ class ChoicesController < ApplicationController
     private
 
     def choices_params
-        params.require(:choice).permit(:content, :next_id)
+        params.require(:choice).permit(:content, :next_node_id)
     end
 end

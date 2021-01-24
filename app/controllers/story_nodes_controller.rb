@@ -5,7 +5,7 @@ class StoryNodesController < ApplicationController
         if story_node.valid?
             render json: story_node, include: [ :choices ]
         else
-            render json: story_node.errors
+            render json: story_node.errors, status: 400
         end
     end
 
@@ -22,7 +22,7 @@ class StoryNodesController < ApplicationController
         if story_node.valid?
             render json: story_node, include: [ :choices ]
         else
-            render json: story_node.errors
+            render json: story_node.errors, status: 400
         end
     end
 
