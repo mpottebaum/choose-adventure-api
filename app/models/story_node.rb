@@ -3,7 +3,8 @@ class StoryNode < ApplicationRecord
     has_many :choices
     accepts_nested_attributes_for :choices
 
-    validates :content, presence: true
+    validates :content, :grid_x, :grid_y, presence: true
+    validates :grid_x, uniqueness: { scope: :grid_y, message: "Grid coordinates must be unique" }
     validate :cannot_have_both_next_node_id_and_choices
 
     private
