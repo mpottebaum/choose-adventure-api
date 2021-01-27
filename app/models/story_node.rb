@@ -6,6 +6,7 @@ class StoryNode < ApplicationRecord
     validates :content, :grid_x, :grid_y, presence: true
     validates :grid_x, uniqueness: { scope: :grid_y, message: "Grid coordinates must be unique" }
     validate :cannot_have_both_next_node_id_and_choices
+    validates_inclusion_of :color, :in => %w(red orange yellow green blue purple), :allow_nil => true
 
     private
 
