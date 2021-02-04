@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   put '/stories/:id', to: 'stories#update'
   delete '/stories/:id', to: 'stories#destroy'
 
+  get '/story-nodes', to: 'story_nodes#index'
   post '/story-nodes', to: 'story_nodes#create'
   get '/story-nodes/:id', to: 'story_nodes#show'
   put '/story-nodes/:id', to: 'story_nodes#update'
