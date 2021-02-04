@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  get '/stories', to: 'stories#index'
   post '/stories', to: 'stories#create'
   get '/stories/:id', to: 'stories#show'
   put '/stories/:id', to: 'stories#update'
