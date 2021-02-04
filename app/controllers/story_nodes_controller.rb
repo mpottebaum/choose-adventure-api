@@ -1,4 +1,11 @@
 class StoryNodesController < ApplicationController
+
+    def index
+        story = Story.find(params[:story_id])
+
+        render json: story.story_nodes, include: [ :choices ]
+    end
+
     def create
         story_node = StoryNode.create(story_node_params)
 

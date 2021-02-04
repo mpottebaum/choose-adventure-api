@@ -1,4 +1,11 @@
 class StoriesController < ApplicationController
+
+    def index
+        author = Author.find(params[:author_id])
+
+        render json: author.stories
+    end
+
     def create
         story = Story.create(story_params)
 
