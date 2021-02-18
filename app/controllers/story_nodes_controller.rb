@@ -53,7 +53,7 @@ class StoryNodesController < ApplicationController
             :color,
             :grid_x,
             :grid_y,
-            :choices_attributes => [ :content, :next_node_id ]
+            :choices_attributes => [ :content, :next_node_id, :grid_x, :grid_y ]
         )
     end
 end
