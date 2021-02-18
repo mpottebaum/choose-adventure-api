@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_30_014326) do
+ActiveRecord::Schema.define(version: 2021_02_18_211032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2021_01_30_014326) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "next_node_id"
+    t.integer "grid_x"
+    t.integer "grid_y"
   end
 
   create_table "stories", force: :cascade do |t|
@@ -36,8 +38,6 @@ ActiveRecord::Schema.define(version: 2021_01_30_014326) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "start_node_id"
-    t.integer "grid_width", default: 19
-    t.integer "grid_height", default: 39
   end
 
   create_table "story_nodes", force: :cascade do |t|
