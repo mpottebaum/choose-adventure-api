@@ -24,13 +24,19 @@ class StoryNodesController < ApplicationController
     end
     
     def update
-        story_node = StoryNode.find(params[:id])
-        story_node.update(story_node_params)
+        @story_node = StoryNode.find(params[:id])
+        assign_choice_coordinates
+        if story_node_params[:next_node_id] && @story_node.choices.length > 0
+            @story_node.choices.destroy_all
+        elsif story_node_params[:choices_attributes].length > 0 && @story_node.next_node_id
+            @story_node.update(next_node_id: nil)
+        end
+        @story_node.update(story_node_params)
 
-        if story_node.valid?
-            render json: story_node, include: [ :choices ]
+        if @story_node.valid?
+            render json: @story_node, include: [ :choices ]
         else
-            render json: story_node.errors, status: 400
+            render json: @story_node.errors, status: 400
         end
     end
 
@@ -46,9 +52,15 @@ class StoryNodesController < ApplicationController
     def assign_choice_coordinates
         story = Story.find(params[:story_node][:story_id])
         params[:story_node][:choices_attributes] = params[:story_node][:choices_attributes].map.with_index do |choice, i|
-            coordinates = story.assign_choice_coordinates(params[:story_node][:grid_x], params[:story_node][:grid_y], i)
-            choice[:grid_x] = coordinates[:grid_x]
-            choice[:grid_y] = coordinates[:grid_y]
+            if !choice[:grid_x] || !choice[:grid_y]
+                coordinates = story.assign_choice_coordinates(
+                    @story_node ? @story_node.grid_x : params[:story_node][:grid_x],
+                    @story_node ? @story_node.grid_y : params[:story_node][:grid_y],
+                    i
+                )
+                choice[:grid_x] = coordinates[:grid_x]
+                choice[:grid_y] = coordinates[:grid_y]
+            end
             choice
         end
     end
