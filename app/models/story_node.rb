@@ -9,6 +9,8 @@ class StoryNode < ApplicationRecord
     validate :cannot_share_grid_coordinates_with_a_choice
     validates_inclusion_of :color, :in => %w(red orange yellow green blue purple), :allow_nil => true
 
+    before_destroy :destroy_choices
+
     private
 
     def cannot_have_both_next_node_id_and_choices
@@ -22,5 +24,9 @@ class StoryNode < ApplicationRecord
             errors.add(:grid_x, "Story node grid coordinates must be unique")
             errors.add(:grid_y, "Story node grid coordinates must be unique")
         end
+    end
+
+    def destroy_choices
+        choices.destroy_all
     end
 end

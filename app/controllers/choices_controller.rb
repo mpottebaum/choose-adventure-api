@@ -27,6 +27,6 @@ class ChoicesController < ApplicationController
     private
 
     def choices_params
-        params.require(:choice).permit(:content, :next_node_id)
+        params.require(:choice).permit(:content, :next_node_id, :grid_x, :grid_y)
     end
 end
