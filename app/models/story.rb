@@ -12,12 +12,7 @@ class Story < ApplicationRecord
     end
 
     def assign_choice_coordinates(story_node_grid_x, story_node_grid_y, index)
-        x_mover = index
-        if x_mover % 2 == 0
-            x_mover /= -2
-        else
-            x_mover = (x_mover / 2.0).ceil
-        end
+        x_mover = index % 2 == 0 ? (index / -2) : (index / 2.0).ceil
         assigned_x = story_node_grid_x + x_mover
         assigned_y = story_node_grid_y + 2
 
