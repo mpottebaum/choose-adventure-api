@@ -3,8 +3,8 @@ class StoryNode < ApplicationRecord
     has_many :choices
     accepts_nested_attributes_for :choices
 
-    validates :content, :grid_x, :grid_y, presence: true
-    validates :grid_x, uniqueness: { scope: :grid_y, message: "Story node grid coordinates must be unique" }
+    validates :content, :x, :y, presence: true
+    validates :x, uniqueness: { scope: :y, message: "Story node grid coordinates must be unique" }
     validate :cannot_have_both_next_node_id_and_choices
     validate :cannot_share_grid_coordinates_with_a_choice
     validates_inclusion_of :color, :in => %w(red orange yellow green blue purple), :allow_nil => true
@@ -20,9 +20,9 @@ class StoryNode < ApplicationRecord
     end
 
     def cannot_share_grid_coordinates_with_a_choice
-        if story.choices.any? { |choice| choice.grid_x == grid_x && choice.grid_y == grid_y}
-            errors.add(:grid_x, "Story node grid coordinates must be unique")
-            errors.add(:grid_y, "Story node grid coordinates must be unique")
+        if story.choices.any? { |choice| choice.x == x && choice.y == y}
+            errors.add(:x, "Story node grid coordinates must be unique")
+            errors.add(:y, "Story node grid coordinates must be unique")
         end
     end
 
