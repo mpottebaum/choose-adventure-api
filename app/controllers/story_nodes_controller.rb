@@ -52,14 +52,14 @@ class StoryNodesController < ApplicationController
     def assign_choice_coordinates
         story = Story.find(params[:story_node][:story_id])
         params[:story_node][:choices_attributes] = params[:story_node][:choices_attributes].map.with_index do |choice, i|
-            if !choice[:grid_x] || !choice[:grid_y]
+            if !choice[:x] || !choice[:y]
                 coordinates = story.assign_choice_coordinates(
-                    @story_node ? @story_node.grid_x : params[:story_node][:grid_x],
-                    @story_node ? @story_node.grid_y : params[:story_node][:grid_y],
+                    @story_node ? @story_node.x : params[:story_node][:x],
+                    @story_node ? @story_node.y : params[:story_node][:y],
                     i
                 )
-                choice[:grid_x] = coordinates[:grid_x]
-                choice[:grid_y] = coordinates[:grid_y]
+                choice[:x] = coordinates[:x]
+                choice[:y] = coordinates[:y]
             end
             choice
         end
@@ -74,9 +74,9 @@ class StoryNodesController < ApplicationController
             :story_id,
             :end,
             :color,
-            :grid_x,
-            :grid_y,
-            :choices_attributes => [ :content, :next_node_id, :grid_x, :grid_y, :color, :id ]
+            :x,
+            :y,
+            :choices_attributes => [ :content, :next_node_id, :x, :y, :color, :id ]
         )
     end
 end
