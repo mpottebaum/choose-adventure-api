@@ -47,6 +47,17 @@ class StoryNodesController < ApplicationController
         render json: { message: 'success' }
     end
 
+    def move
+        story_node = StoryNode.find(params[:id])
+        story_node.update(story_node_params)
+
+        if story_node.valid?
+            render json: story_node, include: [ :choices ]
+        else
+            render json: story_node.errors, status: 400
+        end
+    end
+
     private
 
     def assign_choice_coordinates

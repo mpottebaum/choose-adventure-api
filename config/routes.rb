@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/story-nodes/:id', to: 'story_nodes#show'
   put '/story-nodes/:id', to: 'story_nodes#update'
   delete '/story-nodes/:id', to: 'story_nodes#destroy'
+  put '/story-nodes/:id/move', to: 'story_nodes#move'
   
   get '/choices/:id', to: 'choices#show'
   put '/choices/:id', to: 'choices#update'
